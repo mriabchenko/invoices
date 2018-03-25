@@ -10,12 +10,12 @@ const routes: Routes = [
   {
     path: 'invoice',
     loadChildren: './invoice/invoice.module#InvoiceModule',
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {
 }
