@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/take';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class RestTransportService implements AbstractTransportService {
