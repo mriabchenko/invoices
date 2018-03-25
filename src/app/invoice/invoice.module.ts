@@ -6,13 +6,15 @@ import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { RestTransportService } from './services/transport/rest-transport.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     InvoiceRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [CreateComponent, ListComponent],
   providers: [

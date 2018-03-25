@@ -1,10 +1,21 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1>Create new invoice</h1>
+      <div class="card mt-3">
+        <div class="card-body">
+          <h1 class="card-title">Create invoice</h1>
+          <p class="card-subtitle mb-2 text-muted">Fill the form to create new invoice</p>
+          <form [formGroup]="createInvoiceFormContainer.createInvoiceFormGroup">
+            <div class="form-group">
+              <label for="customerSelect">Customer select</label>
+              <select class="form-control" id="customerSelect" formControlName="customerId">
+                <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
+              </select>
+              <small class="form-text text-muted">{{selectedCustomerAddress}}</small>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-
   </div>
 </div>
