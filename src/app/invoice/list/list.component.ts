@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RestTransportService } from '../services/transport/rest-transport.service';
+import { InvoiceInterface } from '../interfaces/invoice.interface';
 
 @Component({
   selector: 'app-list',
@@ -8,19 +9,18 @@ import { RestTransportService } from '../services/transport/rest-transport.servi
 })
 export class ListComponent implements OnInit {
 
+  public invoices: InvoiceInterface[];
+
   public constructor(private transport: RestTransportService) {
+    this.invoices = [];
+    this.transport.getInvoices().then((invoices: InvoiceInterface) => {
+      this.invoices = invoices;
+      console.log(this.invoices);
+    });
   }
 
   public ngOnInit() {
-    this.transport.getCustomers().then(data => {
-      console.log('customers', data);
-    });
-    this.transport.getInvoices().then(data => {
-      console.log('invoices', data);
-    });
-    this.transport.getProducts().then(data => {
-      console.log('productsForm', data);
-    });
+
   }
 
 }

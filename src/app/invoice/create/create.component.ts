@@ -60,7 +60,7 @@ export class CreateComponent implements OnInit, OnDestroy {
         this.invoiceTotal = this.createInvoiceFormContainer.calcInvoiceTotal(products);
         const invoice: InvoiceInterface = {
           id: 1,
-          customer_id: parseInt(this.createInvoiceFormContainer.customerId.value, 10),
+          customer_id: +this.createInvoiceFormContainer.customerId.value,
           discount: 0,
           total: this.invoiceTotal,
         };
