@@ -5,13 +5,13 @@ import { InvoiceRoutingModule } from './invoice-routing.module';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import { RestTransportService } from './services/transport/rest-transport.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule,
     InvoiceRoutingModule,
+    HttpClientModule,
   ],
   declarations: [CreateComponent, ListComponent],
   providers: [

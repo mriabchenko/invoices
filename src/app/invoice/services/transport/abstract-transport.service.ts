@@ -10,8 +10,7 @@ export abstract class AbstractTransportService {
   // TODO: describe create methods
   // public abstract createInvoice(): InvoiceInterface[];
   public abstract getCustomers(): Promise<CustomerInterface[]>;
-
-  // public abstract getInvoices(): Promise<InvoiceInterface[]>;
-  // public abstract getInvoiceItems(): Promise<InvoiceItemInterface[]>;
-  // public abstract getProducts(): Promise<ProductInterface[]>;
+  public abstract getInvoices(): Promise<InvoiceInterface[]>;
+  public abstract getInvoiceItems(invoiceId: number): Promise<InvoiceItemInterface[]>;
+  public abstract getProducts(): Promise<ProductInterface[]>;
 }

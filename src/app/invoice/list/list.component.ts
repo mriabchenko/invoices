@@ -13,7 +13,13 @@ export class ListComponent implements OnInit {
 
   public ngOnInit() {
     this.transport.getCustomers().then(data => {
-      console.log(data);
+      console.log('customers', data);
+    });
+    this.transport.getInvoices().then(data => {
+      console.log('invoices', data);
+    });
+    this.transport.getProducts().then(data => {
+      console.log('products', data);
     });
   }
 
