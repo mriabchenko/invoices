@@ -8,7 +8,7 @@ import { InvoiceItemInterface } from '../../interfaces/invoice-item.interface';
  */
 export abstract class AbstractTransportService {
   // TODO: describe create methods
-  // public abstract createInvoice(): InvoiceInterface[];
+  public abstract createInvoice(invoice: InvoiceInterface): Promise<any>;
   public abstract getCustomers(): Promise<CustomerInterface[]>;
   public abstract getInvoices(): Promise<InvoiceInterface[]>;
   public abstract getInvoiceItems(invoiceId: number): Promise<InvoiceItemInterface[]>;

@@ -1,3 +1,85 @@
-<p>
-  create works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card mt-3">
+        <div class="card-body">
+          <h1 class="card-title">Create invoice</h1>
+          <p class="card-subtitle mb-2 text-muted">Fill the form to create new invoice</p>
+          <form [formGroup]="createInvoiceFormContainer.createInvoiceFormGroup">
+            <div class="form-group">
+              <label for="customerSelect">Select a customer</label>
+              <select class="form-control" id="customerSelect" formControlName="customerId"
+                      [class.is-invalid]="createInvoiceFormContainer.customerId.invalid && createInvoiceFormContainer.customerId.touched">
+                <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
+              </select>
+              <small class="form-text text-muted">{{selectedCustomerAddress}}</small>
+            </div>
+          </form>
+
+          <form [formGroup]="newProductPickerForm">
+            <div class="form-group">
+              <label for="newProductSelect">Select a product to add in invoice</label>
+              <select class="form-control" id="newProductSelect" formControlName="newProductId">
+                <option *ngFor="let product of products" [value]="product.id">{{product.name}} / (${{product.price}})</option>
+              </select>
+            </div>
+          </form>
+
+          <ng-container *ngIf="createInvoiceFormContainer.productsForm.length">
+            <h3>Invoice items</h3>
+            <form [formGroup]="createInvoiceFormContainer.productsForm">
+              <div class="row"
+                *ngFor="let invoiceItemFormGroup of createInvoiceFormContainer.productsForm.controls"
+                [formGroup]="invoiceItemFormGroup">
+
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label>Product name</label>
+                    <input type="text" class="form-control" formControlName="name" readonly>
+                  </div>
+                </div>
+
+                <div class="col-4 col-lg-2">
+                  <div class="form-group">
+                    <label>Price</label>
+                    <input type="text" class="form-control" formControlName="price" readonly>
+                  </div>
+                </div>
+
+                <div class="col-4 col-lg-2">
+                  <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number"
+                           min="1"
+                           class="form-control"
+                           formControlName="quantity"
+                           [class.is-invalid]="invoiceItemFormGroup.get('quantity').invalid">
+                  </div>
+                </div>
+
+                <div class="col-4 col-lg-2">
+                  <div class="form-group">
+                    <label>Discount</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        class="form-control"
+                        formControlName="discount"
+                        [class.is-invalid]="invoiceItemFormGroup.get('discount').invalid">
+                      <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <h5 class="float-right" *ngIf="this.createInvoiceFormContainer.productsForm.valid">Invoice total: ${{invoiceTotal}}</h5>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
