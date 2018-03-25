@@ -8,7 +8,8 @@
           <form [formGroup]="createInvoiceFormContainer.createInvoiceFormGroup">
             <div class="form-group">
               <label for="customerSelect">Select a customer</label>
-              <select class="form-control" id="customerSelect" formControlName="customerId">
+              <select class="form-control" id="customerSelect" formControlName="customerId"
+                      [class.is-invalid]="createInvoiceFormContainer.customerId.invalid && createInvoiceFormContainer.customerId.touched">
                 <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
               </select>
               <small class="form-text text-muted">{{selectedCustomerAddress}}</small>
@@ -27,37 +28,49 @@
           <ng-container *ngIf="createInvoiceFormContainer.productsForm.length">
             <h3>Invoice items</h3>
             <form [formGroup]="createInvoiceFormContainer.productsForm">
-              <div
+              <div class="row"
                 *ngFor="let invoiceItemFormGroup of createInvoiceFormContainer.productsForm.controls"
                 [formGroup]="invoiceItemFormGroup">
-                <div class="form-group">
-                  <label>Product name</label>
-                  <input type="text" class="form-control" formControlName="name" readonly>
+
+                <div class="col-12 col-lg-6">
+                  <div class="form-group">
+                    <label>Product name</label>
+                    <input type="text" class="form-control" formControlName="name" readonly>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Price</label>
-                  <input type="text" class="form-control" formControlName="price" readonly>
+
+                <div class="col-4 col-lg-2">
+                  <div class="form-group">
+                    <label>Price</label>
+                    <input type="text" class="form-control" formControlName="price" readonly>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Quantity</label>
-                  <input type="number"
-                         min="1"
-                         class="form-control"
-                         formControlName="quantity"
-                         [class.is-invalid]="invoiceItemFormGroup.get('quantity').invalid">
+
+                <div class="col-4 col-lg-2">
+                  <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number"
+                           min="1"
+                           class="form-control"
+                           formControlName="quantity"
+                           [class.is-invalid]="invoiceItemFormGroup.get('quantity').invalid">
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Discount</label>
-                  <div class="input-group mb-3">
-                    <input
-                      type="number"
-                      min="0"
-                      max="100"
-                      class="form-control"
-                      formControlName="discount"
-                      [class.is-invalid]="invoiceItemFormGroup.get('discount').invalid">
-                    <div class="input-group-append">
-                      <span class="input-group-text">%</span>
+
+                <div class="col-4 col-lg-2">
+                  <div class="form-group">
+                    <label>Discount</label>
+                    <div class="input-group mb-3">
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        class="form-control"
+                        formControlName="discount"
+                        [class.is-invalid]="invoiceItemFormGroup.get('discount').invalid">
+                      <div class="input-group-append">
+                        <span class="input-group-text">%</span>
+                      </div>
                     </div>
                   </div>
                 </div>
