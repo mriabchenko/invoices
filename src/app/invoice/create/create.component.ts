@@ -5,6 +5,7 @@ import { CustomerInterface } from '../interfaces/customer.interface';
 import { RestTransportService } from '../services/transport/rest-transport.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ProductInterface } from '../interfaces/product.interface';
+import { NewInvoiceItemInterface } from '../interfaces/new-invoice-item.interface';
 
 @Component({
   selector: 'app-create',
@@ -22,6 +23,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   private customerSelectSubscription: Subscription;
   private newProductSelectSubscription: Subscription;
+  private productsFormSubscription: Subscription;
 
   public constructor(private fb: FormBuilder, private transport: RestTransportService) {
     this.newProductPickerForm = this.fb.group({
@@ -41,18 +43,24 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.selectedCustomerAddress = 'Customer is not selected';
   }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.customerSelectSubscription = this.createInvoiceFormContainer.customerId.valueChanges.subscribe((selectedCustomerId: number) => {
       this.selectedCustomerAddress = this.customers.find((customer: CustomerInterface) => customer.id === +selectedCustomerId).address;
     });
+
     this.newProductSelectSubscription = this.newProductPickerForm.get('newProductId').valueChanges.subscribe((newProductId: number) => {
       const selectedProduct = this.products.find((product: ProductInterface) => product.id === +newProductId);
       this.createInvoiceFormContainer.addProductToInvoice(selectedProduct);
     });
+
+    this.productsFormSubscription = this.createInvoiceFormContainer.productsForm.valueChanges.subscribe((products: NewInvoiceItemInterface) => {
+      console.log(this.createInvoiceFormContainer.calcInvoiceTotal(products));
+    });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.customerSelectSubscription.unsubscribe();
     this.newProductSelectSubscription.unsubscribe();
+    this.productsFormSubscription.unsubscribe();
   }
 }
