@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  restApiBaseUrl: 'http://localhost:8000'
+  restApiBaseUrl: 'http://localhost:8000',
 };

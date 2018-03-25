@@ -6,7 +6,7 @@ import { RestTransportService } from '../services/transport/rest-transport.servi
 import { Subscription } from 'rxjs/Subscription';
 import { ProductInterface } from '../interfaces/product.interface';
 import { NewInvoiceItemInterface } from '../interfaces/new-invoice-item.interface';
-import { InvoiceItemInterface } from '../interfaces/invoice-item.interface';
+import { InvoiceInterface } from '../interfaces/invoice.interface';
 
 @Component({
   selector: 'app-create',
@@ -55,12 +55,12 @@ export class CreateComponent implements OnInit, OnDestroy {
       this.createInvoiceFormContainer.addProductToInvoice(selectedProduct);
     });
 
-    this.productsFormSubscription = this.createInvoiceFormContainer.productsForm.valueChanges.subscribe((products: NewInvoiceItemInterface) => {
+    this.productsFormSubscription = this.createInvoiceFormContainer.productsForm.valueChanges.subscribe((products: NewInvoiceItemInterface[]) => {
       if (this.createInvoiceFormContainer.productsForm.valid) {
         this.invoiceTotal = this.createInvoiceFormContainer.calcInvoiceTotal(products);
-        const invoice: InvoiceItemInterface = {
+        const invoice: InvoiceInterface = {
           id: 1,
-          customer_id: this.createInvoiceFormContainer.customerId.value,
+          customer_id: parseInt(this.createInvoiceFormContainer.customerId.value, 10),
           discount: 0,
           total: this.invoiceTotal,
         };
