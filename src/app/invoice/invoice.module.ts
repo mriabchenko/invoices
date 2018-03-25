@@ -4,12 +4,18 @@ import { CommonModule } from '@angular/common';
 import { InvoiceRoutingModule } from './invoice-routing.module';
 import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
+import { RestTransportService } from './services/transport/rest-transport.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
-    InvoiceRoutingModule
+    InvoiceRoutingModule,
+    HttpClientModule,
   ],
-  declarations: [CreateComponent, ListComponent]
+  declarations: [CreateComponent, ListComponent],
+  providers: [
+    RestTransportService,
+  ],
 })
 export class InvoiceModule { }
