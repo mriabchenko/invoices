@@ -15,22 +15,40 @@ export class RestTransportService implements AbstractTransportService {
   }
 
   public getCustomers(): Promise<CustomerInterface[]> {
+    const result = new Subject<CustomerInterface[]>();
     const requestUrl: string = environment.restApiBaseUrl + '/api/customers';
-    return this.http.get(requestUrl).take(1).toPromise();
+    this.http.get(requestUrl).take(1).toPromise().then((data: CustomerInterface[]) => {
+      result.next(data);
+    });
+    return result.take(1).toPromise();
+    // I am not using this to prevent ts interfaces - related compiler errors
+    // return this.http.get(environment.restApiBaseUrl + '/api/customers').take(1).toPromise()
   }
 
   public getInvoices(): Promise<InvoiceInterface[]> {
+    const result = new Subject<InvoiceInterface[]>();
     const requestUrl: string = environment.restApiBaseUrl + '/api/invoices';
-    return this.http.get(requestUrl).take(1).toPromise();
+    this.http.get(requestUrl).take(1).toPromise().then((data: InvoiceInterface[]) => {
+      result.next(data);
+    });
+    return result.take(1).toPromise();
   }
 
   public getInvoiceItems(invoiceId: number): Promise<InvoiceItemInterface[]> {
+    const result = new Subject<InvoiceItemInterface[]>();
     const requestUrl: string = environment.restApiBaseUrl + `/api/invoices/${invoiceId}/items`;
-    return this.http.get(requestUrl).take(1).toPromise();
+    this.http.get(requestUrl).take(1).toPromise().then((data: InvoiceItemInterface[]) => {
+      result.next(data);
+    });
+    return result.take(1).toPromise();
   }
 
   public getProducts(): Promise<ProductInterface[]> {
+    const result = new Subject<ProductInterface[]>();
     const requestUrl: string = environment.restApiBaseUrl + '/api/products';
-    return this.http.get(requestUrl).take(1).toPromise();
+    this.http.get(requestUrl).take(1).toPromise().then((data: ProductInterface[]) => {
+      result.next(data);
+    });
+    return result.take(1).toPromise();
   }
 }
