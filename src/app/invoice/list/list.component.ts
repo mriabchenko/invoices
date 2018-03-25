@@ -13,9 +13,8 @@ export class ListComponent implements OnInit {
 
   public constructor(private transport: RestTransportService) {
     this.invoices = [];
-    this.transport.getInvoices().then((invoices: InvoiceInterface) => {
+    this.transport.getInvoices().then((invoices: InvoiceInterface[]) => {
       this.invoices = invoices;
-      console.log(this.invoices);
     });
   }
 

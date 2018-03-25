@@ -1,6 +1,6 @@
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductInterface } from '../../interfaces/product.interface';
-import { NewInvoiceItemInterface } from '../../interfaces/new-invoice-item.interface';
+import { InvoiceItemInterface } from '../../interfaces/invoice-item.interface';
 
 export class CreateInvoiceFormModel {
   public createInvoiceFormGroup: FormGroup;
@@ -27,8 +27,9 @@ export class CreateInvoiceFormModel {
    * Dynamically calculating invoice total
    * @returns {Observable<number>}
    */
-  public calcInvoiceTotal(invoiceItems: NewInvoiceItemInterface[]): number {
-    return +invoiceItems.reduce((prevTotal, product) => prevTotal + product.price * product.quantity * (1 - product.discount / 100) , 0).toFixed(2);
+  public calcInvoiceTotal(invoiceItems: InvoiceItemInterface[]): number {
+    // return +invoiceItems.reduce((prevTotal, product) => prevTotal + product.price * product.quantity * (1 - product.discount / 100) , 0).toFixed(2);
+    return 0;
   }
 
   private initProductFormGroup(product: ProductInterface): FormGroup {
