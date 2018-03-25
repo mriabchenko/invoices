@@ -7,13 +7,23 @@
           <p class="card-subtitle mb-2 text-muted">Fill the form to create new invoice</p>
           <form [formGroup]="createInvoiceFormContainer.createInvoiceFormGroup">
             <div class="form-group">
-              <label for="customerSelect">Customer select</label>
+              <label for="customerSelect">Select a customer</label>
               <select class="form-control" id="customerSelect" formControlName="customerId">
                 <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
               </select>
               <small class="form-text text-muted">{{selectedCustomerAddress}}</small>
             </div>
           </form>
+
+          <form [formGroup]="newProductPickerForm">
+            <div class="form-group">
+              <label for="newProductSelect">Select a product to add in invoice</label>
+              <select class="form-control" id="newProductSelect" formControlName="newProductId">
+                <option *ngFor="let product of products" [value]="product.id">{{product.name}} / (${{product.price}})</option>
+              </select>
+            </div>
+          </form>
+
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ export class ListComponent implements OnInit {
       console.log('invoices', data);
     });
     this.transport.getProducts().then(data => {
-      console.log('products', data);
+      console.log('productsForm', data);
     });
   }
 
