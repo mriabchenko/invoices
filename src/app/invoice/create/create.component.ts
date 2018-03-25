@@ -6,6 +6,7 @@ import { RestTransportService } from '../services/transport/rest-transport.servi
 import { Subscription } from 'rxjs/Subscription';
 import { ProductInterface } from '../interfaces/product.interface';
 import { NewInvoiceItemInterface } from '../interfaces/new-invoice-item.interface';
+import { InvoiceItemInterface } from '../interfaces/invoice-item.interface';
 
 @Component({
   selector: 'app-create',
@@ -20,7 +21,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   public products: ProductInterface[];
 
   public selectedCustomerAddress: string;
-  public invoiceTotal: string;
+  public invoiceTotal: number;
 
   private customerSelectSubscription: Subscription;
   private newProductSelectSubscription: Subscription;
@@ -56,11 +57,15 @@ export class CreateComponent implements OnInit, OnDestroy {
 
     this.productsFormSubscription = this.createInvoiceFormContainer.productsForm.valueChanges.subscribe((products: NewInvoiceItemInterface) => {
       if (this.createInvoiceFormContainer.productsForm.valid) {
-        this.invoiceTotal = `$${this.createInvoiceFormContainer.calcInvoiceTotal(products)}`;
-      } else {
-        this.invoiceTotal = 'Invoice data is invalid';
+        this.invoiceTotal = this.createInvoiceFormContainer.calcInvoiceTotal(products);
+        const invoice: InvoiceItemInterface = {
+          id: 1,
+          customer_id: this.createInvoiceFormContainer.customerId.value,
+          discount: 0,
+          total: this.invoiceTotal,
+        };
+        this.transport.createInvoice(invoice);
       }
-
     });
   }
 

@@ -76,7 +76,7 @@
                 </div>
               </div>
             </form>
-            <h5 class="float-right">Invoice total: {{invoiceTotal}}</h5>
+            <h5 class="float-right" *ngIf="this.createInvoiceFormContainer.productsForm.valid">Invoice total: ${{invoiceTotal}}</h5>
           </ng-container>
         </div>
       </div>

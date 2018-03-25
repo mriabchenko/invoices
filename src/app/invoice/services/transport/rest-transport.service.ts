@@ -14,6 +14,15 @@ export class RestTransportService implements AbstractTransportService {
   public constructor(private http: HttpClient) {
   }
 
+  public createInvoice(invoice: InvoiceInterface): Promise<any> {
+    const result = new Subject<any>();
+    const requestUrl: string = environment.restApiBaseUrl + '/api/invoices';
+    this.http.post(requestUrl, invoice).take(1).toPromise().then((data: any) => {
+      result.next(data);
+    });
+    return result.take(1).toPromise();
+  }
+
   public getCustomers(): Promise<CustomerInterface[]> {
     const result = new Subject<CustomerInterface[]>();
     const requestUrl: string = environment.restApiBaseUrl + '/api/customers';
