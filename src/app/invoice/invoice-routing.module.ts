@@ -6,7 +6,7 @@ import {CreateComponent} from './create/create.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'list',
+    redirectTo: 'create',
     pathMatch: 'full',
   },
   {
@@ -16,12 +16,12 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateComponent,
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class InvoiceRoutingModule {
 }
