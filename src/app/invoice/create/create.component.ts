@@ -20,6 +20,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   public products: ProductInterface[];
 
   public selectedCustomerAddress: string;
+  public invoiceTotal: string;
 
   private customerSelectSubscription: Subscription;
   private newProductSelectSubscription: Subscription;
@@ -54,7 +55,12 @@ export class CreateComponent implements OnInit, OnDestroy {
     });
 
     this.productsFormSubscription = this.createInvoiceFormContainer.productsForm.valueChanges.subscribe((products: NewInvoiceItemInterface) => {
-      console.log(this.createInvoiceFormContainer.calcInvoiceTotal(products));
+      if (this.createInvoiceFormContainer.productsForm.valid) {
+        this.invoiceTotal = `$${this.createInvoiceFormContainer.calcInvoiceTotal(products)}`;
+      } else {
+        this.invoiceTotal = 'Invoice data is invalid';
+      }
+
     });
   }
 

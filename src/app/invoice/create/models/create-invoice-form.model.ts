@@ -29,7 +29,7 @@ export class CreateInvoiceFormModel {
    * @returns {Observable<number>}
    */
   public calcInvoiceTotal(invoiceItems: NewInvoiceItemInterface[]): number {
-    return 0;
+    return invoiceItems.reduce((prevTotal, product) => prevTotal + product.price * product.quantity * (1 - product.discount / 100) , 0).toFixed(2);
   }
 
   private initProductFormGroup(product: ProductInterface): FormGroup {
