@@ -1,12 +1,12 @@
-import {CustomerInterface} from '../../interfaces/customer.interface';
-import {ProductInterface} from '../../interfaces/product.interface';
-import {InvoiceInterface} from '../../interfaces/invoice.interface';
-import {InvoiceItemInterface} from '../../interfaces/invoice-item.interface';
-import {AbstractTransportService} from './abstract-transport.service';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
+import { CustomerInterface } from '../../interfaces/customer.interface';
+import { ProductInterface } from '../../interfaces/product.interface';
+import { InvoiceInterface } from '../../interfaces/invoice.interface';
+import { InvoiceItemInterface } from '../../interfaces/invoice-item.interface';
+import { AbstractTransportService } from './abstract-transport.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 import 'rxjs/add/operator/take';
-import {Subject} from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
 
 export class RestTransportService implements AbstractTransportService {
   public constructor(private http: HttpClient) {
