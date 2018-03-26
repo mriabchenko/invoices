@@ -6,16 +6,20 @@ export class CreateInvoiceFormModel {
   public createInvoiceFormGroup: FormGroup;
 
   public customerId: FormControl;
+  public discount: FormControl;
   public productsForm: FormArray;
 
   public constructor(private fb: FormBuilder) {
     this.createInvoiceFormGroup = this.fb.group({});
+
     // creating form controls
     this.customerId = this.fb.control('', [Validators.required]);
+    this.discount = this.fb.control(0, [Validators.min(0), Validators.max(100), Validators.pattern('^[0-9]+$')]);
     this.productsForm = this.fb.array([]);
 
     // adding form controls to the form group
     this.createInvoiceFormGroup.addControl('customerId', this.customerId);
+    this.createInvoiceFormGroup.addControl('discount', this.discount);
     this.createInvoiceFormGroup.addControl('productsForm', this.productsForm);
   }
 
@@ -24,12 +28,12 @@ export class CreateInvoiceFormModel {
   }
 
   /**
-   * Dynamically calculating invoice total
-   * @returns {Observable<number>}
+   * Calculating invoice total
    */
-  public calcInvoiceTotal(invoiceItems: InvoiceItemInterface[]): number {
-    // return +invoiceItems.reduce((prevTotal, product) => prevTotal + product.price * product.quantity * (1 - product.discount / 100) , 0).toFixed(2);
-    return 0;
+  public calcInvoiceTotal(): number {
+    const invoiceItems = this.productsForm.value;
+    const discount = +this.discount.value;
+    return +(+invoiceItems.reduce((prevTotal, product) => prevTotal + product.price * product.quantity , 0) * (1 - discount / 100)).toFixed(2);
   }
 
   private initProductFormGroup(product: ProductInterface): FormGroup {
@@ -38,7 +42,6 @@ export class CreateInvoiceFormModel {
       name: product.name,
       price: product.price,
       quantity: this.fb.control(1, [Validators.min(1), Validators.pattern('^[0-9]+$')]),
-      discount: this.fb.control(0, [Validators.min(0), Validators.max(100), Validators.pattern('^[0-9]+$')]),
     });
   }
 }
