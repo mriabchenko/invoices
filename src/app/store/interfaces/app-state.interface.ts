@@ -6,5 +6,6 @@ export interface AppStateInterface {
   invoices: InvoiceInterface[];
   customers: CustomerInterface[];
   products: ProductInterface[];
-  invoicesNubmer: number;
+  invoicesNumber: number;
+  loading: boolean;
 }

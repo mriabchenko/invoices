@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import * as invoiceActions from '../actions/invoices.actions';
+import * as invoiceActions from '../actions/app.actions';
 
 import { Actions, Effect } from '@ngrx/effects';
-import { RestTransportService } from '../../invoice/services/transport/rest-transport.service';
+import { RestTransportService } from '../../services/transport/rest-transport.service';
 import { Observable } from 'rxjs/Observable';
 import { InvoiceInterface } from '../../invoice/interfaces/invoice.interface';
-import { Subject } from 'rxjs/Subject';
 
 export type Action = invoiceActions.All;
 
@@ -15,16 +14,12 @@ import 'rxjs/add/operator/mergeMap';
 
 
 @Injectable()
-export class InvoicesEffects {
+export class AppEffects {
 
   @Effect()
   public getInvoices: Observable<Action> = this.actions.ofType(invoiceActions.GET_INVOICES)
     .mergeMap(() => {
-      const result = new Subject<InvoiceInterface[]>();
-      this.transport.getInvoices().then((invoices: InvoiceInterface[]) => {
-        result.next(invoices);
-      });
-      return result;
+      return this.transport.getInvoices();
     })
     .map((invoices: InvoiceInterface[]) => new invoiceActions.GetInvoicesSuccess(invoices));
 

@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import * as invoiceActions from './store/actions/app.actions';
+import { RestTransportService } from './services/transport/rest-transport.service';
+import { Store } from '@ngrx/store';
+import { AppStateInterface } from './store/interfaces/app-state.interface';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  public title = 'app';
+  public constructor(private transport: RestTransportService, private store: Store<AppStateInterface>) {
+    this.getInvoices();
+  }
+
+  public getInvoices(): void {
+    this.store.dispatch(new invoiceActions.GetInvoices());
+  }
 }
