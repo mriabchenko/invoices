@@ -10,9 +10,9 @@
               <label for="customerSelect">Select a customer</label>
               <select class="form-control" id="customerSelect" formControlName="customerId"
                       [class.is-invalid]="createInvoiceFormContainer.customerId.invalid && createInvoiceFormContainer.customerId.touched">
-                <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
+                <option *ngFor="let customer of customers$ | async" [value]="customer.id">{{customer.name}}</option>
               </select>
-              <small class="form-text text-muted">{{selectedCustomerAddress}}</small>
+              <small class="form-text text-muted">{{selectedCustomerAddress$ | async}}</small>
             </div>
           </form>
 
@@ -20,7 +20,7 @@
             <div class="form-group">
               <label for="newProductSelect">Select a product to add in invoice</label>
               <select class="form-control" id="newProductSelect" formControlName="newProductId">
-                <option *ngFor="let product of products" [value]="product.id">{{product.name}} / (${{product.price}})</option>
+                <option *ngFor="let product of products | async" [value]="product.id">{{product.name}} / (${{product.price}})</option>
               </select>
             </div>
           </form>
