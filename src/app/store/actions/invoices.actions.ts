@@ -1,8 +1,11 @@
 import { Action } from '@ngrx/store';
 import { InvoiceInterface } from '../../invoice/interfaces/invoice.interface';
+import { InvoicePostInterface } from '../interfaces/invoice-post.interface';
 
 export const ADD_INVOICE = '[Invoice] Add';
-export const REMOVE_INVOICE = '[Invoice] Remove';
+
+export const GET_INVOICES = '[Invoice] Get';
+export const GET_INVOICES_SUCCESS = '[Invoice] Get success';
 
 export class AddInvoice implements Action {
   public readonly type = ADD_INVOICE;
@@ -12,12 +15,16 @@ export class AddInvoice implements Action {
   }
 }
 
-export class RemoveInvoice implements Action {
-  public readonly type = REMOVE_INVOICE;
+export class GetInvoices implements Action {
+  public readonly type = GET_INVOICES;
+}
 
-  public constructor(public payload: InvoiceInterface) {
+export class GetInvoicesSuccess implements Action {
+  public readonly type = GET_INVOICES_SUCCESS;
+
+  public constructor(public payload: InvoicePostInterface) {
 
   }
 }
 
-export type InvoicesActions = AddInvoice | RemoveInvoice;
+export type All = AddInvoice | GetInvoices | GetInvoicesSuccess;
