@@ -19,7 +19,8 @@ export class GetInvoices implements Action {
 // tslint:disable:max-classes-per-file
 export class GetInvoicesSuccess implements Action {
   public readonly type = GET_INVOICES_SUCCESS;
-  public constructor(public payload: InvoiceInterface[]){
+
+  public constructor(public payload: InvoiceInterface[]) {
 
   }
 }
@@ -30,20 +31,24 @@ export class GetCustomers implements Action {
 
 export class GetCustomersSuccess implements Action {
   public readonly type = GET_CUSTOMERS_SUCCESS;
-  public constructor(public payload: CustomerInterface[]){
+
+  public constructor(public payload: CustomerInterface[]) {
 
   }
 }
+
 export class GetProducts implements Action {
   public readonly type = GET_PRODUCTS;
 }
 
 export class GetProductsSuccess implements Action {
   public readonly type = GET_PRODUCTS_SUCCESS;
-  public constructor(public payload: ProductInterface[]){
+
+  public constructor(public payload: ProductInterface[]) {
 
   }
 }
+
 // tslint:enable:max-classes-per-file
 
 export type All =

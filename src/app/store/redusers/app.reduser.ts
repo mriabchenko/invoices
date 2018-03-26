@@ -7,7 +7,6 @@ import { ProductInterface } from '../../invoice/interfaces/product.interface';
 export type Action = appActions.All;
 /**
  * Default invoices state
- * @type {{id: number; customer_id: number; discount: number; total: number}[]}
  */
 const defaultAppState: AppStateInterface = {
   invoices: <InvoiceInterface[]> [],
@@ -16,6 +15,7 @@ const defaultAppState: AppStateInterface = {
   invoicesNumber: 0,
   loading: false,
 };
+
 
 export function appReducer(state: AppStateInterface = defaultAppState, action: Action): AppStateInterface {
   // TODO: remove in prod

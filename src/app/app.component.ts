@@ -12,9 +12,17 @@ import { AppStateInterface } from './store/interfaces/app-state.interface';
 export class AppComponent {
   public constructor(private transport: RestTransportService, private store: Store<AppStateInterface>) {
     this.getInvoices();
+    this.getCustomers();
+    this.getProducts();
   }
 
   public getInvoices(): void {
     this.store.dispatch(new invoiceActions.GetInvoices());
+  }
+  public getCustomers(): void {
+    this.store.dispatch(new invoiceActions.GetCustomers());
+  }
+  public getProducts(): void {
+    this.store.dispatch(new invoiceActions.GetProducts());
   }
 }
