@@ -1,21 +1,19 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {ListComponent} from './list/list.component';
-import {CreateComponent} from './create/create.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'create',
+    redirectTo: 'list',
     pathMatch: 'full',
   },
   {
     path: 'list',
-    component: ListComponent,
+    loadChildren: './list/list.module#ListModule',
   },
   {
     path: 'create',
-    component: CreateComponent,
+    loadChildren: './create/create.module#CreateModule',
   },
 ];
 
