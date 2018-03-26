@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   restApiBaseUrl: 'http://localhost:8000',
-  hmr: false,
+  hmr: true,
 };
