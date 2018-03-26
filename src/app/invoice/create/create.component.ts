@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/find';
 import 'rxjs/add/operator/switch';
+import { InvoiceInterface } from '../interfaces/invoice.interface';
 
 @Component({
   selector: 'app-create',
@@ -68,20 +69,23 @@ export class CreateComponent implements OnDestroy {
     this.createInfoFormSubscription = this.createInvoiceFormContainer
       .createInvoiceFormGroup
       .valueChanges
-      .subscribe((data: any) => {
+      .map((data: any) => {
         if (this.createInvoiceFormContainer.createInvoiceFormGroup.valid) {
           this.invoiceTotal = this.createInvoiceFormContainer.calcInvoiceTotal();
           // TODO: create new invoice
-          // this.invoiceTotal = this.createInvoiceFormContainer.calcInvoiceTotal(products);
-          // const invoice: InvoiceInterface = {
-          //   id: 1,
-          //   customer_id: +this.createInvoiceFormContainer.customerId.value,
-          //   discount: 0,
-          //   total: this.invoiceTotal,
-          // };
-          // this.transport.createInvoice(invoice);
+          const invoice: InvoiceInterface = {
+            id: 1,
+            customer_id: +this.createInvoiceFormContainer.customerId.value,
+            discount: +this.createInvoiceFormContainer.discount.value,
+            total: this.invoiceTotal,
+          };
+          return this.transport.createInvoice(invoice);
         }
-    });
+      })
+      .switch()
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 
 
