@@ -1,35 +1,23 @@
 import { InvoiceInterface } from '../../invoice/interfaces/invoice.interface';
-import { ADD_INVOICE, InvoicesActions, REMOVE_INVOICE } from '../actions/invoices.actions';
+import * as InvoiceActions from '../actions/invoices.actions';
 
+export type Action = InvoiceActions.All;
 /**
  * Default invoices state
  * @type {{id: number; customer_id: number; discount: number; total: number}[]}
  */
-const defaultState: InvoiceInterface[] = [{
-  id: 1000,
-  customer_id: 1,
-  discount: 0,
-  total: 10,
-}];
+const defaultState: InvoiceInterface[] = [];
 
-/**
- * Helper function to create new state object
- * @param {InvoiceInterface[]} state
- * @param {InvoiceInterface} newData
- * @returns {InvoiceInterface[]}
- */
-const newState = (state: InvoiceInterface[], newData: InvoiceInterface): InvoiceInterface[] => {
-  state.push(newData);
-  return state;
-};
-
-export function invoicesReducer(state: InvoiceInterface[] = defaultState, action: InvoicesActions): InvoiceInterface[] {
-  console.log(action.type, state);
+export function invoicesReducer(state: InvoiceInterface[] = defaultState, action: Action): InvoiceInterface[] {
+  // TODO: remove in prod
+  console.log(action.type);
   switch (action.type) {
-    case ADD_INVOICE:
-      return newState(state, action.payload);
-    case REMOVE_INVOICE :
+    case InvoiceActions.ADD_INVOICE:
+      return [...state, action.payload ];
+    case InvoiceActions.GET_INVOICES :
       return state;
+    case InvoiceActions.GET_INVOICES_SUCCESS :
+      return [...state, ...action.payload ];
     default:
       return state;
   }

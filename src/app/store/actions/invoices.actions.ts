@@ -2,22 +2,21 @@ import { Action } from '@ngrx/store';
 import { InvoiceInterface } from '../../invoice/interfaces/invoice.interface';
 
 export const ADD_INVOICE = '[Invoice] Add';
-export const REMOVE_INVOICE = '[Invoice] Remove';
+export const GET_INVOICES = '[Invoice] Get';
+export const GET_INVOICES_SUCCESS = '[Invoice] Get success';
 
 export class AddInvoice implements Action {
   public readonly type = ADD_INVOICE;
-
-  public constructor(public payload: InvoiceInterface) {
-
-  }
+  public constructor(public payload: InvoiceInterface) {}
 }
 
-export class RemoveInvoice implements Action {
-  public readonly type = REMOVE_INVOICE;
-
-  public constructor(public payload: InvoiceInterface) {
-
-  }
+export class GetInvoices implements Action {
+  public readonly type = GET_INVOICES;
 }
 
-export type InvoicesActions = AddInvoice | RemoveInvoice;
+export class GetInvoicesSuccess implements Action {
+  public readonly type = GET_INVOICES_SUCCESS;
+  public constructor(public payload: InvoiceInterface[]) {}
+}
+
+export type All = AddInvoice | GetInvoices | GetInvoicesSuccess;
