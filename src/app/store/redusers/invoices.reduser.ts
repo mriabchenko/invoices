@@ -6,22 +6,18 @@ export type Action = InvoiceActions.All;
  * Default invoices state
  * @type {{id: number; customer_id: number; discount: number; total: number}[]}
  */
-const defaultState: InvoiceInterface[] = [{
-  id: 1000,
-  customer_id: 1,
-  discount: 0,
-  total: 10,
-}];
+const defaultState: InvoiceInterface[] = [];
 
-export function invoicesReducer(state: InvoiceInterface[] = defaultState, action: Action): any {
-  console.log(action.type, state);
+export function invoicesReducer(state: InvoiceInterface[] = defaultState, action: Action): InvoiceInterface[] {
+  // TODO: remove in prod
+  console.log(action.type);
   switch (action.type) {
     case InvoiceActions.ADD_INVOICE:
-      return [...state, action.payload];
+      return [...state, action.payload ];
     case InvoiceActions.GET_INVOICES :
-      return { loading: true, invoices: state };
+      return state;
     case InvoiceActions.GET_INVOICES_SUCCESS :
-      return { loading: false, invoices: [ ...state, action.payload ] };
+      return [...state, ...action.payload ];
     default:
       return state;
   }
