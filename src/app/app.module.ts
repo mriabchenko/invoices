@@ -7,11 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { invoicesReducer } from './store/redusers/invoices.reduser';
 import { EffectsModule } from '@ngrx/effects';
-import { InvoicesEffects } from './store/effects/invoices.effects';
-import { RestTransportService } from './invoice/services/transport/rest-transport.service';
+import { RestTransportService } from './services/transport/rest-transport.service';
 import { HttpClientModule } from '@angular/common/http';
+import { appReducer } from './store/redusers/app.reduser';
+import { AppEffects } from './store/effects/app.effects';
 
 
 @NgModule({
@@ -22,8 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({invoices: invoicesReducer}),
-    EffectsModule.forRoot([InvoicesEffects]),
+    StoreModule.forRoot({state: appReducer}),
+    EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 10,
     }),

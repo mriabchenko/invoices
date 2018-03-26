@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CreateInvoiceFormModel } from './models/create-invoice-form.model';
 import { CustomerInterface } from '../interfaces/customer.interface';
-import { RestTransportService } from '../services/transport/rest-transport.service';
+import { RestTransportService } from '../../services/transport/rest-transport.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ProductInterface } from '../interfaces/product.interface';
 import { InvoiceInterface } from '../interfaces/invoice.interface';
@@ -33,15 +33,6 @@ export class CreateComponent implements OnInit, OnDestroy {
     });
 
     this.createInvoiceFormContainer = new CreateInvoiceFormModel(this.fb);
-    this.transport.getCustomers().then((customers: CustomerInterface[]) => {
-      this.customers = customers;
-      console.log('customers', this.customers);
-    });
-    this.transport.getProducts().then((products: ProductInterface[]) => {
-      this.products = products;
-      console.log('products', this.products);
-    });
-
     this.selectedCustomerAddress = 'Customer is not selected';
   }
 
