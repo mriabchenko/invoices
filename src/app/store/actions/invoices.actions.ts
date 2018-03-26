@@ -4,6 +4,7 @@ import { InvoiceInterface } from '../../invoice/interfaces/invoice.interface';
 export const ADD_INVOICE = '[Invoice] Add';
 export const GET_INVOICES = '[Invoice] Get';
 export const GET_INVOICES_SUCCESS = '[Invoice] Get success';
+export const GET_INVOICES_NUMBER = '[Invoice] Get number';
 
 export class AddInvoice implements Action {
   public readonly type = ADD_INVOICE;
@@ -19,4 +20,8 @@ export class GetInvoicesSuccess implements Action {
   public constructor(public payload: InvoiceInterface[]) {}
 }
 
-export type All = AddInvoice | GetInvoices | GetInvoicesSuccess;
+export class GetInvoicesNumber implements Action {
+  public readonly type = GET_INVOICES_NUMBER;
+}
+
+export type All = AddInvoice | GetInvoices | GetInvoicesSuccess | GetInvoicesNumber;

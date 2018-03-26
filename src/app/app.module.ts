@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { invoicesReducer } from './store/redusers/invoices.reduser';
+import { appStateReducer } from './store/redusers/invoices.reduser';
 import { EffectsModule } from '@ngrx/effects';
 import { InvoicesEffects } from './store/effects/invoices.effects';
 import { RestTransportService } from './invoice/services/transport/rest-transport.service';
@@ -22,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({invoices: invoicesReducer}),
+    StoreModule.forRoot({state: appStateReducer}),
     EffectsModule.forRoot([InvoicesEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 10,
