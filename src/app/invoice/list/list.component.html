@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col">
       <div class="card mt-3">
+        <button (click)="addOne()">Add one</button>
         <div class="card-body">
           <h1 class="card-title">Invoices</h1>
           <ng-container *ngIf="invoices.length !== 0; else noInvoices">
@@ -16,7 +17,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let invoice of invoices">
+              <tr *ngFor="let invoice of invoices$ | async">
                 <th scope="row">{{invoice.id}}</th>
                 <th scope="row">{{invoice.customer_id}}</th>
                 <td>{{invoice.discount}}</td>
