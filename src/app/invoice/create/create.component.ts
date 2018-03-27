@@ -79,7 +79,7 @@ export class CreateComponent implements OnDestroy {
             discount: +this.createInvoiceFormContainer.discount.value,
             total: this.invoiceTotal,
           };
-          return this.store.dispatch(new invoiceActions.PostInvoice(newInvoice));
+          return this.store.dispatch(new invoiceActions.UpdateInvoice(newInvoice));
         } else {
           return;
         }

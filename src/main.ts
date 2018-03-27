@@ -5,6 +5,9 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import { hmrBootstrap } from './hmr';
 
+// to make HMR work
+declare var module: any;
+
 if (environment.production) {
   enableProdMode();
 }

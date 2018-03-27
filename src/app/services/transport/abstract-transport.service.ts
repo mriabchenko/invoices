@@ -10,7 +10,7 @@ import { PostInvoiceResponseInterface } from '../../invoice/interfaces/post-invo
  */
 export abstract class AbstractTransportService {
   public abstract createInvoice(invoice: InvoiceInterface): Observable<any>;
-  public abstract updateInvoice(invoice: InvoiceInterface, invoiceId: number): Observable<any>
+  public abstract updateInvoice(invoice: InvoiceInterface): Observable<any>
   public abstract getCustomers(): Observable<CustomerInterface[]>;
   public abstract getInvoices(): Observable<InvoiceInterface[]>;
   public abstract getProducts(): Observable<ProductInterface[]>;

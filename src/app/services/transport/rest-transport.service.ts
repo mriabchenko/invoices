@@ -3,12 +3,12 @@ import { ProductInterface } from '../../invoice/interfaces/product.interface';
 import { InvoiceInterface } from '../../invoice/interfaces/invoice.interface';
 import { InvoiceItemInterface } from '../../invoice/interfaces/invoice-item.interface';
 import { AbstractTransportService } from './abstract-transport.service';
+import { PostInvoiceResponseInterface } from '../../invoice/interfaces/post-invoice-response.interface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
-import { PostInvoiceResponseInterface } from '../../invoice/interfaces/post-invoice-response.interface';
+import 'rxjs/add/operator/take';
 
 @Injectable()
 export class RestTransportService implements AbstractTransportService {
@@ -20,8 +20,8 @@ export class RestTransportService implements AbstractTransportService {
     return this.http.post(requestUrl, invoice).map((response: PostInvoiceResponseInterface) => response);
   }
 
-  public updateInvoice(invoice: InvoiceInterface, invoiceId: number): Observable<PostInvoiceResponseInterface> {
-    const requestUrl: string = environment.restApiBaseUrl + `/api/invoices/${invoiceId}`;
+  public updateInvoice(invoice: InvoiceInterface): Observable<PostInvoiceResponseInterface> {
+    const requestUrl: string = environment.restApiBaseUrl + `/api/invoices/${invoice.id}`;
     return this.http.put(requestUrl, invoice).map((response: PostInvoiceResponseInterface) => response);
   }
 

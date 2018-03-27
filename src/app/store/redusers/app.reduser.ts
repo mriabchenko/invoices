@@ -40,6 +40,16 @@ export function appReducer(state: AppStateInterface = defaultAppState, action: A
       state.invoicesNumber++;
       return state;
 
+    case appActions.UPDATE_INVOICE :
+      state.loading = true;
+      return state;
+
+    case appActions.UPDATE_INVOICE_SUCCESS :
+      state.loading = false;
+      const updatedInvoiceIndex: number = state.invoices.findIndex((invoice: InvoiceInterface) => invoice.id === action.payload.id);
+      state.invoices[updatedInvoiceIndex] = action.payload;
+      return state;
+
     case appActions.GET_CUSTOMERS :
       state.loading = true;
       return state;
