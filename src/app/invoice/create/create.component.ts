@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/find';
 import 'rxjs/add/operator/switch';
 import { InvoiceInterface } from '../interfaces/invoice.interface';
+import * as invoiceActions from '../../store/actions/app.actions';
 
 @Component({
   selector: 'app-create',
@@ -79,12 +80,11 @@ export class CreateComponent implements OnDestroy {
             discount: +this.createInvoiceFormContainer.discount.value,
             total: this.invoiceTotal,
           };
-          return this.transport.createInvoice(invoice);
+          return invoice;
         }
       })
-      .switch()
-      .subscribe(data => {
-        console.log(data);
+      .subscribe(invoice => {
+        this.store.dispatch(new invoiceActions.PostInvoice([invoice]));
       });
   }
 
