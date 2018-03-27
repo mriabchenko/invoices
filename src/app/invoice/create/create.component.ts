@@ -13,7 +13,6 @@ import 'rxjs/add/operator/find';
 import 'rxjs/add/operator/switch';
 import { InvoiceInterface } from '../interfaces/invoice.interface';
 import * as invoiceActions from '../../store/actions/app.actions';
-import { PostInvoiceResponseInterface } from '../interfaces/post-invoice-response.interface';
 
 @Component({
   selector: 'app-create',
