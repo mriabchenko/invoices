@@ -1,6 +1,5 @@
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProductInterface } from '../../interfaces/product.interface';
-import { InvoiceItemInterface } from '../../interfaces/invoice-item.interface';
 
 export class CreateInvoiceFormModel {
   public createInvoiceFormGroup: FormGroup;

@@ -18,8 +18,6 @@ const defaultAppState: AppStateInterface = {
 
 
 export function appReducer(state: AppStateInterface = defaultAppState, action: Action): AppStateInterface {
-  // TODO: remove in prod
-  console.log(action.type);
   switch (action.type) {
 
     case appActions.GET_INVOICES :
@@ -30,6 +28,16 @@ export function appReducer(state: AppStateInterface = defaultAppState, action: A
       state.loading = false;
       state.invoices = action.payload;
       state.invoicesNumber = action.payload.length;
+      return state;
+
+    case appActions.POST_INVOICE :
+      state.loading = true;
+      return state;
+
+    case appActions.POST_INVOICE_SUCCESS :
+      state.loading = false;
+      state.invoices.push(action.payload);
+      state.invoicesNumber++;
       return state;
 
     case appActions.GET_CUSTOMERS :

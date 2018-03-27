@@ -39,6 +39,14 @@ export class AppEffects {
     })
     .map((products: ProductInterface[]) => new appActions.GetProductsSuccess(products));
 
+  @Effect()
+  public postInvoice: Observable<Action> = this.actions.ofType(appActions.POST_INVOICE)
+    .map((action: appActions.PostInvoice) => action.payload)
+    .mergeMap((payload: InvoiceInterface) => {
+      return this.transport.createInvoice(payload);
+    })
+    .map((invoice: InvoiceInterface) => new appActions.PostInvoiceSuccess(invoice));
+
   public constructor(private actions: Actions, private transport: RestTransportService) {
 
   }

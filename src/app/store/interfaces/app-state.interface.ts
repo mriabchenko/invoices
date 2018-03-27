@@ -6,6 +6,6 @@ export interface AppStateInterface {
   invoices: InvoiceInterface[];
   customers: CustomerInterface[];
   products: ProductInterface[];
-  invoicesNumber: number;
+  invoicesNumber: number; // yes, i can calculate invoices.length, but i just wanna make in a little bit more interesting to do the project.
   loading: boolean;
 }

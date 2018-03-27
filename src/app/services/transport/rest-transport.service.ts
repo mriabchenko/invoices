@@ -8,16 +8,16 @@ import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
+import { PostInvoiceResponseInterface } from '../../invoice/interfaces/post-invoice-response.interface';
 
 @Injectable()
 export class RestTransportService implements AbstractTransportService {
   public constructor(private http: HttpClient) {
   }
 
-  // TODO: check the response interface
-  public createInvoice(invoice: InvoiceInterface): Observable<any> {
+  public createInvoice(invoice: InvoiceInterface): Observable<PostInvoiceResponseInterface> {
     const requestUrl: string = environment.restApiBaseUrl + '/api/invoices';
-    return this.http.post(requestUrl, invoice).map((response: any) => response);
+    return this.http.post(requestUrl, invoice).map((response: PostInvoiceResponseInterface) => response);
   }
 
   public getCustomers(): Observable<CustomerInterface[]> {

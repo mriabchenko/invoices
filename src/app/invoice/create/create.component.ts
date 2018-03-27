@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CreateInvoiceFormModel } from './models/create-invoice-form.model';
 import { CustomerInterface } from '../interfaces/customer.interface';
@@ -11,6 +11,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/find';
 import 'rxjs/add/operator/switch';
+import { InvoiceInterface } from '../interfaces/invoice.interface';
+import * as invoiceActions from '../../store/actions/app.actions';
 
 @Component({
   selector: 'app-create',
@@ -46,7 +48,7 @@ export class CreateComponent implements OnDestroy {
       .valueChanges
       .map((selectedCustomerId: string) =>
         this.customers$.map(
-          (customers: CustomerInterface[]) => customers.find((customer: CustomerInterface) => customer.id === +selectedCustomerId).address
+          (customers: CustomerInterface[]) => customers.find((customer: CustomerInterface) => customer.id === +selectedCustomerId).address,
         ))
       .switch();
 
@@ -56,7 +58,7 @@ export class CreateComponent implements OnDestroy {
       .valueChanges
       .map((newProductId: number) =>
         this.products$.map((products: ProductInterface[]) =>
-          products.find((product: ProductInterface) => product.id === +newProductId)
+          products.find((product: ProductInterface) => product.id === +newProductId),
         ))
       .switch()
       .subscribe((selectedProduct: ProductInterface) => {
@@ -68,20 +70,21 @@ export class CreateComponent implements OnDestroy {
     this.createInfoFormSubscription = this.createInvoiceFormContainer
       .createInvoiceFormGroup
       .valueChanges
-      .subscribe((data: any) => {
-        if (this.createInvoiceFormContainer.createInvoiceFormGroup.valid) {
+      .map((data: any) => {
+        if (this.createInvoiceFormContainer.createInvoiceFormGroup.valid && this.createInvoiceFormContainer.productsForm.length) {
           this.invoiceTotal = this.createInvoiceFormContainer.calcInvoiceTotal();
-          // TODO: create new invoice
-          // this.invoiceTotal = this.createInvoiceFormContainer.calcInvoiceTotal(products);
-          // const invoice: InvoiceInterface = {
-          //   id: 1,
-          //   customer_id: +this.createInvoiceFormContainer.customerId.value,
-          //   discount: 0,
-          //   total: this.invoiceTotal,
-          // };
-          // this.transport.createInvoice(invoice);
+          const newInvoice: InvoiceInterface = {
+            id: 1, // any number will work fine
+            customer_id: +this.createInvoiceFormContainer.customerId.value,
+            discount: +this.createInvoiceFormContainer.discount.value,
+            total: this.invoiceTotal,
+          };
+          return this.store.dispatch(new invoiceActions.PostInvoice(newInvoice));
+        } else {
+          return;
         }
-    });
+      })
+      .subscribe();
   }
 
 

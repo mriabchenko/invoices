@@ -8,7 +8,6 @@ import { Observable } from 'rxjs/Observable';
  * Describes the interface of communication with the server
  */
 export abstract class AbstractTransportService {
-  // TODO: describe create methods
   public abstract createInvoice(invoice: InvoiceInterface): Observable<any>;
   public abstract getCustomers(): Observable<CustomerInterface[]>;
   public abstract getInvoices(): Observable<InvoiceInterface[]>;
