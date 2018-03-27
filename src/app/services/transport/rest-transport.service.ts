@@ -20,6 +20,11 @@ export class RestTransportService implements AbstractTransportService {
     return this.http.post(requestUrl, invoice).map((response: PostInvoiceResponseInterface) => response);
   }
 
+  public updateInvoice(invoice: InvoiceInterface, invoiceId: number): Observable<PostInvoiceResponseInterface> {
+    const requestUrl: string = environment.restApiBaseUrl + `/api/invoices/${invoiceId}`;
+    return this.http.put(requestUrl, invoice).map((response: PostInvoiceResponseInterface) => response);
+  }
+
   public getCustomers(): Observable<CustomerInterface[]> {
     const requestUrl: string = environment.restApiBaseUrl + '/api/customers';
     return this.http.get(requestUrl).map((response: CustomerInterface[]) => response);
