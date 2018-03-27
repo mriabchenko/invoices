@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CreateInvoiceFormModel } from './models/create-invoice-form.model';
 import { CustomerInterface } from '../interfaces/customer.interface';
@@ -48,7 +48,7 @@ export class CreateComponent implements OnDestroy {
       .valueChanges
       .map((selectedCustomerId: string) =>
         this.customers$.map(
-          (customers: CustomerInterface[]) => customers.find((customer: CustomerInterface) => customer.id === +selectedCustomerId).address
+          (customers: CustomerInterface[]) => customers.find((customer: CustomerInterface) => customer.id === +selectedCustomerId).address,
         ))
       .switch();
 
@@ -58,7 +58,7 @@ export class CreateComponent implements OnDestroy {
       .valueChanges
       .map((newProductId: number) =>
         this.products$.map((products: ProductInterface[]) =>
-          products.find((product: ProductInterface) => product.id === +newProductId)
+          products.find((product: ProductInterface) => product.id === +newProductId),
         ))
       .switch()
       .subscribe((selectedProduct: ProductInterface) => {
