@@ -5,9 +5,9 @@
         <!--<button (click)="addOne()">Add one</button>-->
         <div class="card-body">
           <p class="d-flex align-items-start mb-0">
-            <span class="card-title h1">Invoices</span><span class="badge badge-pill badge-secondary">{{invoicesNumber$ | async}}</span>
+            <span class="card-title h1">Invoices</span>
+            <span class="badge badge-pill badge-secondary">{{invoicesNumber$ | async}}</span>
           </p>
-          <!-- TODO: make it work later -->
           <ng-container *ngIf="(invoicesNumber$ | async)!== 0; else noInvoices">
             <p class="card-subtitle mb-2 text-muted">The list of existing invoices</p>
             <table class="table table-hover">

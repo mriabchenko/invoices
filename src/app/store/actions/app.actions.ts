@@ -18,14 +18,14 @@ export const GET_PRODUCTS_SUCCESS = '[Products] Get success';
 // tslint:disable:max-classes-per-file
 export class PostInvoice implements Action {
   public readonly type = POST_INVOICE;
-  public constructor(public payload: InvoiceInterface[]) {
+  public constructor(public payload: InvoiceInterface) {
 
   }
 }
 
 export class PostInvoiceSuccess implements Action {
   public readonly type = POST_INVOICE_SUCCESS;
-  public constructor(public payload: InvoiceInterface[]) {
+  public constructor(public payload: InvoiceInterface) {
 
   }
 }

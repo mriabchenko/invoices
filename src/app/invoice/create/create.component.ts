@@ -71,21 +71,20 @@ export class CreateComponent implements OnDestroy {
       .createInvoiceFormGroup
       .valueChanges
       .map((data: any) => {
-        if (this.createInvoiceFormContainer.createInvoiceFormGroup.valid) {
+        if (this.createInvoiceFormContainer.createInvoiceFormGroup.valid && this.createInvoiceFormContainer.productsForm.length) {
           this.invoiceTotal = this.createInvoiceFormContainer.calcInvoiceTotal();
-          // TODO: create new invoice
-          const invoice: InvoiceInterface = {
-            id: 1,
+          const newInvoice: InvoiceInterface = {
+            id: 1, // any number will work fine
             customer_id: +this.createInvoiceFormContainer.customerId.value,
             discount: +this.createInvoiceFormContainer.discount.value,
             total: this.invoiceTotal,
           };
-          return invoice;
+          return this.store.dispatch(new invoiceActions.PostInvoice(newInvoice));
+        } else {
+          return;
         }
       })
-      .subscribe(invoice => {
-        this.store.dispatch(new invoiceActions.PostInvoice([invoice]));
-      });
+      .subscribe();
   }
 
 

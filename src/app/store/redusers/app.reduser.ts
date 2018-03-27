@@ -18,8 +18,6 @@ const defaultAppState: AppStateInterface = {
 
 
 export function appReducer(state: AppStateInterface = defaultAppState, action: Action): AppStateInterface {
-  // TODO: remove in prod
-  console.log(action.type);
   switch (action.type) {
 
     case appActions.GET_INVOICES :

@@ -15,7 +15,6 @@ export class RestTransportService implements AbstractTransportService {
   public constructor(private http: HttpClient) {
   }
 
-  // TODO: check the response interface
   public createInvoice(invoice: InvoiceInterface): Observable<PostInvoiceResponseInterface> {
     const requestUrl: string = environment.restApiBaseUrl + '/api/invoices';
     return this.http.post(requestUrl, invoice).map((response: PostInvoiceResponseInterface) => response);
